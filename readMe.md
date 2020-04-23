@@ -110,3 +110,32 @@ max1与max2居然相等？这就是超过精读范围造成的问题，而BigInt
 
     foo = bar; // error: Type 'bigint' is not assignable to type 'number'.
     bar = foo; // error: Type 'number' is not assignable to type 'bigint'.
+
+### 4、Typescript其他常见类型
+
+#### 1、计算机类型系统理论中的顶级类型
+
+- any
+
+	为在编程阶段还不清楚类型的变量指定一个类型，这些值可能来自动态内容，比如来自用户输入或者第三方代码库。
+	此时不希望类型检查器对这些值进行检查而是直接让它们通过编译阶段的检查。那么可以使用any类型来标记这些变量：
+
+	let  notSure： any = 4；
+	notSure = "maybe a string instead";
+
+	any类型是多人协作项目的大忌，很可能把typescript变成AnyScript，通常的不得已的情况下，不应该首先考虑使用此类型、
+
+- unknown
+
+	unknown是TypeScript引入了新类型。是any对应的安全类型。
+	unknown和any的主要区别是unknown类型会更加严格；
+
+### 2、类型系统中的底部类型：
+
+- never
+
+### 3、非原始类型（non-primitive type）
+
+- obj
+
+其他常见的元祖、数组等
