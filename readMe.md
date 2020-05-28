@@ -128,7 +128,18 @@ max1与max2居然相等？这就是超过精读范围造成的问题，而BigInt
 - unknown
 
 	unknown是TypeScript引入了新类型。是any对应的安全类型。
-	unknown和any的主要区别是unknown类型会更加严格；
+	unknown和any的主要区别是unknown类型会更加严格；在对unknown类型的值执行大多数操作之前,我们必须进行某种形式的检查,而在对 any 类型的值执行操作之前,我们不必进行任何检查。
+
+    我们先看一下他跟 any 的共同点,它跟 any 一样,可以是任何类型:
+
+        let value: any;
+
+        value = true;             // OK
+        value = 1;                // OK
+        value = "Hello World";    // OK
+        value = Symbol("type");   // OK
+        value = {}                // OK
+        value = []                // OK
 
 ### 2、类型系统中的底部类型：
 
