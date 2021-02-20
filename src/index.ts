@@ -1,11 +1,19 @@
-function greeter(person: string) {
-    return "Hello " + person;
+class Student {
+    fullName: string;
+    constructor(public firstName: string, public middleInitial: string, public lastName: string) {
+        this.fullName = firstName + ' ' + middleInitial + ' ' + lastName;
+    }
 }
 
-function warnUser(): void {
-    alert('this is mt waring message');
+interface Person {
+    firstName: string;
+    lastName: string;
 }
 
-const a: void = undefined;
+function greeter(person: Person) {
+    return "Hello " + person.firstName + ' ' + person.lastName;
+}
 
-const user = "Eric Lee";
+const user = new Student('Eric', '·', 'Lee');
+
+document.body.innerHTML = greeter(user);
