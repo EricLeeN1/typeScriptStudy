@@ -1,18 +1,36 @@
-class Car2 {
-    protected run() {
-        console.log('启动');
-    }
+class Person {
+  protected name: string;
+  protected constructor(theName: string) {
+    this.name = theName;
+  }
 }
 
-class GTR extends Car2 {
-    init() {
-        this.run();
-    }
+// Employee 能够继承 Person
+class Employee extends Person {
+  private department: string;
+
+  constructor(name: string, department: string) {
+    super(name);
+    this.department = department;
+  }
+
+  public getElevatorPitch() {
+    return `Hello, my name is ${this.name} and I work in ${this.department}.`;
+  }
 }
 
-const car2 = new Car2()
-const gtr = new GTR()
+let howard = new Employee("Howard", "Sales");
+// let john = new Person(" john", "Sales"); // 类“Person”的构造函数是受保护的，仅可在类声明中访问。
+console.log(howard.getElevatorPitch());
+// console.log(howard.name); // 属性“name”受保护，只能在类“Person”及其子类中访问。
 
-// car2.run() // [ts] 属性“run”受保护，只能在类“Car2”及其子类中访问。
-gtr.init() // 启动...
-// gtr.run() // [ts] 属性“run”受保护，只能在类“Car2”及其子类中访问。
+class Octopus {
+//   readonly name: string;
+  readonly NumberOfLegs: number = 8;
+  constructor(readonly name: string) {
+    this.name = name;
+  }
+}
+
+let dad = new Octopus('Man with the 8 strong legs');
+// dad.name = 'Man with the 8 strong legs'; // 无法分配到 "name" ，因为它是只读属性。
