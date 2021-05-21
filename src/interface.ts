@@ -9,7 +9,7 @@
 interface User {
     name: string,
     age?: number,
-    readonly isMale: boolean,
+    readonly isMale: boolean, // 利用readonly
     // say: Say
     // say: (words: string) => string
 }

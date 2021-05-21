@@ -95,10 +95,10 @@ max1与max2居然相等？这就是超过精读范围造成的问题，而BigInt
 
     // 注意，这里是 JavaScript 代码，并不是 typescript
     const max = BigInt(Number.MAX_SAFE_INTEGER);
-
+    
     const max1 = max + 1n
     const max2 = max + 2n
-
+    
     max1 === max2 // false
 
 值得注意的是我们需要用 BigInt(number) 把 Number 转化为 BigInt,同时如果类型是 BigInt ,那么数字后面需要加 n ,就如同上面例子的 const max1 = max + 1n 中的 1n。
@@ -107,7 +107,7 @@ max1与max2居然相等？这就是超过精读范围造成的问题，而BigInt
 
     declare let foo: number;
     declare let bar: bigint;
-
+    
     foo = bar; // error: Type 'bigint' is not assignable to type 'number'.
     bar = foo; // error: Type 'number' is not assignable to type 'bigint'.
 
@@ -115,7 +115,7 @@ max1与max2居然相等？这就是超过精读范围造成的问题，而BigInt
 
 #### 1、计算机类型系统理论中的顶级类型
 
-- any
+-   any
 
 	为在编程阶段还不清楚类型的变量指定一个类型，这些值可能来自动态内容，比如来自用户输入或者第三方代码库。
 	此时不希望类型检查器对这些值进行检查而是直接让它们通过编译阶段的检查。那么可以使用any类型来标记这些变量：
@@ -133,7 +133,7 @@ max1与max2居然相等？这就是超过精读范围造成的问题，而BigInt
     我们先看一下他跟 any 的共同点,它跟 any 一样,可以是任何类型:
 
         let value: any;
-
+      
         value = true;             // OK
         value = 1;                // OK
         value = "Hello World";    // OK
@@ -141,12 +141,52 @@ max1与max2居然相等？这就是超过精读范围造成的问题，而BigInt
         value = {}                // OK
         value = []                // OK
 
-### 2、类型系统中的底部类型：
+#### 2、类型系统中的底部类型：
 
 - never
 
-### 3、非原始类型（non-primitive type）
+#### 3、非原始类型（non-primitive type）
 
 - obj
 
 其他常见的元祖、数组等
+
+
+
+#### 4、数组（Array）
+
+
+​    const list: number[] = [1, 2, 3] 或const list: Array<number>= [1, 2, 3]
+
+#### 5、元祖（Tuple）
+
+let x:[string,number]
+
+超出长度存在元祖越界问题
+
+​	const tuple: [string, number] = ['a', 1]; 
+
+​	tuple.push(2); // ok 
+
+​	console.log(tuple); // ["a", 1, 2] -> 正常打印出来
+
+​	console.log(tuple[2]); // Tuple type '[string, number]' of length '2' has no element at index '2'
+
+#### 6、对象（Object）
+
+object 表示非原始类型，也就是除 number，string，boolean，symbol，null 或 undefined 之外的类型。
+
+#### 7、枚举类型（Enum）
+
+当我们声明一个枚举类型是,虽然没有给它们赋值,但是它们的值其实是默认的数字类型,而且默认从0开始依次累加:
+
+编译后的 JavaScript 中体现出来了,因为 `Direction[Direction["Up"] = 10] = "Up"` 也就是 `Direction[10] = "Up"` ,所以我们可以把枚举类型看成一个JavaScript对象，而由于其特殊的构造，导致其拥有正反向同时映射的特性。
+
+### 5、接口（interface）
+
+TypeScript 的核心原则之一是对值所具有的结构进行类型检查,它有时被称做“鸭式辨型法”或“结构性子类型化”。
+
+`readonly isMale: boolean,` 利用readonly把一个属性变成只读属性，之后就无法对他进行修改
+
+`age?: number,`age属性既可能是`number`类型也可能是`undefined`
+
